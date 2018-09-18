@@ -8,7 +8,16 @@ non-determinism :
 	for i in 1 2 3 4 5 ; do \
 		echo "\nRun number: $$i\n" ; \
 		./non-determinism ; \
-	done	
+	done
+
+performance :
+	$(CXX) $(CXXFLAGS) performance.cpp -o performance
+	for T in 1 2 4 8 16 32 ; do \
+		for N in 1 2 4 8 16 32 ; do \
+			echo "\nPerformance T=$$T N=$$N" ; \
+			./performance $$T $$N ; \
+		done \
+	done
 
 clean:
-	$(RM) *.o non-determinism
+	$(RM) *.o non-determinism performance
