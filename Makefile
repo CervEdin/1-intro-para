@@ -1,9 +1,10 @@
 # build an executable named myprog from myprog.c
-CC= g++
-CPPFLAGS = -std=c++11 -Wall -pthread
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -pthread
+OBJS = non-determinism.o
 
-all: non-determinism.cpp 
- 	-o non-determinism non-determinism.cpp
+non-determinism :
+	$(CXX) -c $(CXXFLAGS) non-determinism.cpp -o non-determinism
 
 clean:
-	$(RM) myprog
+	$(RM) *.o non-determinism
