@@ -12,12 +12,13 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
       std::cout << "Philosopher " << n << " is thinking." << std::endl;
       out.unlock();
 
+      
+      right->lock();
       left->lock();
       out.lock();
       std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
       out.unlock();
 
-      right->lock();
       out.lock();
       std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
       out.unlock();
