@@ -1,0 +1,46 @@
+\documentclass{article}
+\begin{document}
+\usepackage{multirow}
+
+Logical CPU cores: 16
+Physical processor: 2
+CPU cores: 8
+L1 cache: 32K + 32K
+L2 cache: 256K
+L3 cache: 8192K
+
+\begin{center}
+    \begin{tabular} { |c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c| }
+        \hline
+        Core0 & Core1 & Core2 & Core3 & Core4 & Core5 & Core6 & Core7 \\
+    \end{tabular}
+\end{center}
+
+\end{document}
+
+\end{titlepage}
+\newpage
+\begin{center}
+    \begin{tabular} { |c|c|c|c |c|c|c|c |c|c|c|c |c|c|c|c| }
+        \hline
+        \multicolumn{2}{|c|}{Core0} &
+        \multicolumn{2}{|c|}{Core1} &
+        \multicolumn{2}{|c|}{Core2} &
+        \multicolumn{2}{|c|}{Core3} &
+        \multicolumn{2}{|c|}{Core4} &
+        \multicolumn{2}{|c|}{Core5} &
+        \multicolumn{2}{|c|}{Core6} &
+        \multicolumn{2}{|c|}{Core7} \\
+        \hline
+        L1d 8K & L1i 8K &
+        L1d 8K & L1i 8K &
+        L1d 8K & L1i 8K & 
+        L1d 8K & L1i 8K &
+        L1d 8K & L1i 8K &
+        L1d 8K & L1i 8K &
+        L1d 8K & L1i 8K & 
+        L1d 8K & L1i 8K \\
+    \end{tabular}
+\end{center}
+\textit{Table 11-4. Speedup of having one helper thread for (r = 1) versus (r = MAXINT)}
+\bigskip
