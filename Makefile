@@ -19,5 +19,12 @@ performance :
 		done \
 	done
 
+dining :
+	$(CXX) $(CXXFLAGS) dining.cpp -o dining
+	for i in 2 3 4 5 6 7 8 9 10 ; do \
+		echo "\nPhilosophers : $$i\n" ; \
+		./dining $$i ; \
+	done
+
 clean:
 	$(RM) *.o non-determinism performance
