@@ -8,34 +8,38 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
 {
   while (true)
     {
-      out.lock();
-      std::cout << "Philosopher " << n << " is thinking." << std::endl;
-      out.unlock();
+      if(left->try_lock() && right->try_lock())
+      {
+        out.lock();
+        std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
+        std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
+        out.unlock();
 
-      
-      right->lock();
-      left->lock();
-      out.lock();
-      std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
-      out.unlock();
+        out.lock();
+        std::cout << "Philosopher " << n << " is eating." << std::endl;
+        out.unlock();
 
-      out.lock();
-      std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
-      out.unlock();
+        out.lock();
+        std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
+        out.unlock();
+        right->unlock();
 
-      out.lock();
-      std::cout << "Philosopher " << n << " is eating." << std::endl;
-      out.unlock();
-
-      out.lock();
-      std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
-      out.unlock();
-      right->unlock();
-
-      out.lock();
-      std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
-      out.unlock();
-      left->unlock();
+        out.lock();
+        std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
+        out.unlock();
+        left->unlock();
+        std::this_thread::sleep_for(std::chrono::milliseconds((rand()%6) * 150));
+        out.lock();
+        std::cout << "Philosopher " << n << " is thinking." << std::endl;
+        out.unlock();
+      }
+      else{
+        left->unlock();
+        right->unlock();
+        out.lock();
+        std::cout << "Philosopher " << n << " is thinking." << std::endl;
+        out.unlock();
+      }
     }
 }
 
