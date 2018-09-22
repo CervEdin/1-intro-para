@@ -39,20 +39,8 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         out.unlock();
         left->unlock();
         l = r = false;
-      } 
-      else if (r) // Maybe not needed
-      {
-        out.lock();
-        std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
-        out.unlock();
-
-        // Philosopher failed to pick up left fork, put right fork down
-        out.lock();
-        std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
-        out.unlock();
-        right->unlock();
-        r = false;
-      } 
+      }
+      // If philosopher didn't pick up both forks, it's only possible that it picked up the left fork and not the right
       else if (l) 
       { 
         out.lock();
