@@ -1,0 +1,115 @@
+g++ -std=c++11 -Wall -pthread performance.cpp -o performance
+for T in 1 2 4 8 16 32 ; do \
+	for N in 1 2 4 8 16 32 ; do \
+		echo "\nPerformance T=$T N=$N" ; \
+		./performance $T $N ; \
+	done \
+done
+
+Performance T=1 N=1
+Finished in 0.30471 seconds (wall clock).
+
+Performance T=1 N=2
+Finished in 0.60325 seconds (wall clock).
+
+Performance T=1 N=4
+Finished in 1.20658 seconds (wall clock).
+
+Performance T=1 N=8
+Finished in 2.4148 seconds (wall clock).
+
+Performance T=1 N=16
+Finished in 4.83617 seconds (wall clock).
+
+Performance T=1 N=32
+Finished in 9.66932 seconds (wall clock).
+
+Performance T=2 N=1
+Finished in 0.157308 seconds (wall clock).
+
+Performance T=2 N=2
+Finished in 0.310851 seconds (wall clock).
+
+Performance T=2 N=4
+Finished in 0.613727 seconds (wall clock).
+
+Performance T=2 N=8
+Finished in 1.23133 seconds (wall clock).
+
+Performance T=2 N=16
+Finished in 2.46415 seconds (wall clock).
+
+Performance T=2 N=32
+Finished in 4.9289 seconds (wall clock).
+
+Performance T=4 N=1
+Finished in 0.0841479 seconds (wall clock).
+
+Performance T=4 N=2
+Finished in 0.166348 seconds (wall clock).
+
+Performance T=4 N=4
+Finished in 0.329034 seconds (wall clock).
+
+Performance T=4 N=8
+Finished in 0.649385 seconds (wall clock).
+
+Performance T=4 N=16
+Finished in 1.24902 seconds (wall clock).
+
+Performance T=4 N=32
+Finished in 2.49626 seconds (wall clock).
+
+Performance T=8 N=1
+Finished in 0.0747341 seconds (wall clock).
+
+Performance T=8 N=2
+Finished in 0.147303 seconds (wall clock).
+
+Performance T=8 N=4
+Finished in 0.246916 seconds (wall clock).
+
+Performance T=8 N=8
+Finished in 0.482971 seconds (wall clock).
+
+Performance T=8 N=16
+Finished in 0.961176 seconds (wall clock).
+
+Performance T=8 N=32
+Finished in 1.90763 seconds (wall clock).
+
+Performance T=16 N=1
+Finished in 0.0433534 seconds (wall clock).
+
+Performance T=16 N=2
+Finished in 0.0816226 seconds (wall clock).
+
+Performance T=16 N=4
+Finished in 0.158007 seconds (wall clock).
+
+Performance T=16 N=8
+Finished in 0.31221 seconds (wall clock).
+
+Performance T=16 N=16
+Finished in 0.619521 seconds (wall clock).
+
+Performance T=16 N=32
+Finished in 1.26212 seconds (wall clock).
+
+Performance T=32 N=1
+Finished in 0.0431767 seconds (wall clock).
+
+Performance T=32 N=2
+Finished in 0.0856087 seconds (wall clock).
+
+Performance T=32 N=4
+Finished in 0.166593 seconds (wall clock).
+
+Performance T=32 N=8
+Finished in 0.325786 seconds (wall clock).
+
+Performance T=32 N=16
+Finished in 0.662439 seconds (wall clock).
+
+Performance T=32 N=32
+Finished in 1.27816 seconds (wall clock).
