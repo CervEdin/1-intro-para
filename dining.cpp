@@ -6,7 +6,7 @@ std::mutex out;
 
 void philosopher(int n, std::mutex *left, std::mutex *right)
 {
-  //bool l, r = false;
+  bool l, r = false;
   while (true)
     {
       // The philosopher starts by thinking
@@ -32,7 +32,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
       }
       */
       
-      if(left->try_lock() && right->try_lock()) // More than one philosopher can have two forks if philosophers >= 4
+      if(l = left->try_lock() && r = right->try_lock()) // More than one philosopher can have two forks if philosophers >= 4
       {
         out.lock();
         std::cout << "Philosopher " << n << " picked up both her forks." << std::endl;
@@ -52,7 +52,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         out.unlock();
         left->unlock();
       } 
-      else if (right->try_lock()) 
+      else if (r) 
       {
         out.lock();
         std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
@@ -64,7 +64,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         out.unlock();
         right->unlock();
       } 
-      else if (left->try_lock()) 
+      else if (l) 
       { 
         out.lock();
         std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
