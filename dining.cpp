@@ -9,20 +9,40 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
   bool l, r = false;
   while (true)
     {
-      l = left->try_lock();
+      // The philosopher starts by thinking
       out.lock();
-      std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
+      std::cout << "Philosopher " << n << " is thinking." << std::endl;
       out.unlock();
 
-      r = right->try_lock();
-      out.lock();
-      std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
-      out.unlock();
+      std::this_thread::sleep_for(std::chrono::milliseconds((rand()%6) * 150));
+
+/*
+      l = left->try_lock();
+      if (l) {
+        out.lock();
+        std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
+        out.unlock();  
+      }
       
-      if(l && r)
+      r = right->try_lock();
+      if (r) {
+        out.lock();
+        std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
+        out.unlock();
+      }
+      */
+      
+      if(left->try_lock() && right->try_lock()) // More than one philosopher can have two forks if philosophers >= 4
       {
         out.lock();
+        std::cout << "Philosopher " << n << " picked up both her forks." << std::endl;
+        out.unlock();
+
+        out.lock();
         std::cout << "Philosopher " << n << " is eating." << std::endl;
+        out.unlock;
+
+        out.lock;
         std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
         out.unlock();
         right->unlock();
@@ -31,27 +51,30 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
         out.unlock();
         left->unlock();
-
+      } 
+      else if (right->try_lock()) 
+      {
         out.lock();
-        std::cout << "Philosopher " << n << " is thinking." << std::endl;
+        std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
         out.unlock();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds((rand()%6) * 150));
-      }
-      else{
+        // Philosopher failed to pick up left fork, put right fork down
         out.lock();
         std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
         out.unlock();
-        if(r){ right->unlock(); }
+        right->unlock();
+      } 
+      else if (left->try_lock) 
+      { 
+        out.lock();
+        std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
+        out.unlock(); 
         
+        // Philosopher failed to pick up right fork, put left fork down
         out.lock();
         std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
         out.unlock();
-        if(l){ left->unlock(); }
-
-        out.lock();
-        std::cout << "Philosopher " << n << " is thinking." << std::endl;
-        out.unlock();
+        left->unlock(); 
       }
     }
 }
