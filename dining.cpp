@@ -31,8 +31,8 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         out.unlock();
       }
       */
-      
-      if((l = left->try_lock()) && (r = right->try_lock())) // More than one philosopher can have two forks if philosophers >= 4
+      // Note: More than one philosopher can have two forks if philosophers >= 4
+      if((l = left->try_lock()) && (r = right->try_lock()))
       {
         out.lock();
         std::cout << "Philosopher " << n << " picked up both her forks." << std::endl;
@@ -51,6 +51,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
         out.unlock();
         left->unlock();
+        l, r = false;
       } 
       else if (r) 
       {
@@ -63,6 +64,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
         out.unlock();
         right->unlock();
+        r = false;
       } 
       else if (l) 
       { 
@@ -74,7 +76,8 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         out.lock();
         std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
         out.unlock();
-        left->unlock(); 
+        left->unlock();
+        l = false;
       }
     }
 }
