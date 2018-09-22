@@ -64,7 +64,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         out.unlock();
         right->unlock();
       } 
-      else if (left->try_lock) 
+      else if (left->try_lock()) 
       { 
         out.lock();
         std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
