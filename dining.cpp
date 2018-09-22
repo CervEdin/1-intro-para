@@ -44,7 +44,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
       else if (l) 
       { 
         out.lock();
-        std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
+        std::cout << "Philosopher " << n << " only picked up her left fork." << std::endl;
         out.unlock(); 
 
         // Philosopher failed to pick up right fork, put left fork down
