@@ -51,7 +51,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
         out.unlock();
         left->unlock();
-        l, r = false;
+        l = r = false;
       } 
       else if (r) 
       {
