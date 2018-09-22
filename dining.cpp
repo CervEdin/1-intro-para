@@ -6,7 +6,7 @@ std::mutex out;
 
 void philosopher(int n, std::mutex *left, std::mutex *right)
 {
-  bool l, r = false;
+  //bool l, r = false;
   while (true)
     {
       // The philosopher starts by thinking
@@ -69,7 +69,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         out.lock();
         std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
         out.unlock(); 
-        
+
         // Philosopher failed to pick up right fork, put left fork down
         out.lock();
         std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
