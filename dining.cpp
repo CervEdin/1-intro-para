@@ -10,19 +10,19 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
   while (true)
     {
       l = left->try_lock();
+      out.lock();
+      std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
+      out.unlock();
+
       r = right->try_lock();
+      out.lock();
+      std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
+      out.unlock();
+      
       if(l && r)
       {
         out.lock();
-        std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
-        std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
-        out.unlock();
-
-        out.lock();
         std::cout << "Philosopher " << n << " is eating." << std::endl;
-        out.unlock();
-
-        out.lock();
         std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
         out.unlock();
         right->unlock();
@@ -39,7 +39,14 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         std::this_thread::sleep_for(std::chrono::milliseconds((rand()%6) * 150));
       }
       else{
+        out.lock();
+        std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
+        out.unlock();
         if(r){ right->unlock(); }
+        
+        out.lock();
+        std::cout << "Philosopher " << n << " is putting down her left fork." << std::endl;
+        out.unlock();
         if(l){ left->unlock(); }
 
         out.lock();
