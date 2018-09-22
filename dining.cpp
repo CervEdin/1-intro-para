@@ -16,21 +16,8 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
 
       std::this_thread::sleep_for(std::chrono::milliseconds((rand()%6) * 150));
 
-/*
-      l = left->try_lock();
-      if (l) {
-        out.lock();
-        std::cout << "Philosopher " << n << " picked up her left fork." << std::endl;
-        out.unlock();  
-      }
-      
-      r = right->try_lock();
-      if (r) {
-        out.lock();
-        std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
-        out.unlock();
-      }
-      */
+      // Philosopher attempts to pick up both forks
+      // If philosopher can't pick up the left fork, it will not pick up the right fork
       // Note: More than one philosopher can have two forks if philosophers >= 4
       if((l = left->try_lock()) && (r = right->try_lock()))
       {
@@ -53,7 +40,7 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
         left->unlock();
         l = r = false;
       } 
-      else if (r) 
+      else if (r) // Maybe not needed
       {
         out.lock();
         std::cout << "Philosopher " << n << " picked up her right fork." << std::endl;
