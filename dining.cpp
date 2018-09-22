@@ -40,9 +40,9 @@ void philosopher(int n, std::mutex *left, std::mutex *right)
 
         out.lock();
         std::cout << "Philosopher " << n << " is eating." << std::endl;
-        out.unlock;
+        out.unlock();
 
-        out.lock;
+        out.lock();
         std::cout << "Philosopher " << n << " is putting down her right fork." << std::endl;
         out.unlock();
         right->unlock();
