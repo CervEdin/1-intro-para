@@ -6,6 +6,7 @@ std::mutex out;
 
 void philosopher(int n, std::mutex *left, std::mutex *right)
 {
+  // Is the left/right fork picked up
   bool l, r = false;
   while (true)
     {
